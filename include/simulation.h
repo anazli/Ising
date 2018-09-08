@@ -21,13 +21,10 @@ public:
 
     int steps()const{return Nsteps;}
     int accpt()const{return accepted;}
+    double inter_param()const{return J;}
     double temp()const{return temperature;}
-    double pdf(const double& x){return exp(-x);}
     void thermalization(const int&, const int&);
     void frequency(const int&, const int&);
-    double energy(const Lattice&);
-    double spinEnergy(const Lattice&, const int&, const int&);
-    double magnetization(const Lattice&);
     Lattice metropolis(const Lattice&, double&, double&, std::ofstream&);
 
 private:
@@ -38,5 +35,11 @@ private:
     double J;
 
 };
+
+
+double pdf(const double&);
+double energy(const Lattice&, const double&);
+double spinEnergy(const Lattice&, const int&, const int&);
+double magnetization(const Lattice&);
 
 #endif // SIMULATION_H

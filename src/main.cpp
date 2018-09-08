@@ -21,8 +21,8 @@ int main()
     visual.open("./data/indices.dat");
     visual << lat.rows() << endl;
 
-    double energy = S.energy(lat);
-    double magnetization = S.magnetization(lat);
+    double nrg = energy(lat, S.inter_param());
+    double mgnt = magnetization(lat);
 
     lat.spinsState();
     lat.configuration(out, "./data/init_state.dat");
@@ -31,12 +31,12 @@ int main()
 	
     for(int t = 0 ; t < runs ; ++t)
     {
-        lat = S.metropolis(lat, energy, magnetization, visual);
+        lat = S.metropolis(lat, nrg, mgnt, visual);
 
 	    if( (t % uncorr) == 0 )
 	    {
-        	en_out << energy/N << endl;
-        	mag_out << magnetization/N << endl;
+        	en_out << nrg/N << endl;
+        	mag_out << mgnt/N << endl;
 	    }
     }
 

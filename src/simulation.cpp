@@ -12,6 +12,10 @@ using std::ofstream;
 using std::cout;
 using std::endl;
 
+double pdf(const double& x)
+{
+	return exp(-x);
+}
 
 void Simulation::thermalization(const int& r, const int& c)
 {
@@ -38,7 +42,7 @@ void Simulation::frequency(const int& r, const int& c)
 }
 
 
-double Simulation::energy(const Lattice& lat)
+double energy(const Lattice& lat, const double& param)
 {
     double energy = 0.;
     int r = lat.rows();
@@ -53,10 +57,10 @@ double Simulation::energy(const Lattice& lat)
         }
     }
 
-    return -J * energy;
+    return -param * energy;
 }
 
-double Simulation::spinEnergy(const Lattice& lat, const int& i, const int& j)
+double spinEnergy(const Lattice& lat, const int& i, const int& j)
 {
     double s = 0;
     int r = lat.rows();
@@ -87,7 +91,7 @@ double Simulation::spinEnergy(const Lattice& lat, const int& i, const int& j)
     return lat.index(i,j) * s;
 }
 
-double Simulation::magnetization(const Lattice& lat)
+double magnetization(const Lattice& lat)
 {
     double m = 0.;
     int r = lat.rows();
